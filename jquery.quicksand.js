@@ -15,8 +15,19 @@ Project site: http://razorjack.net/quicksand
 Github site: http://github.com/razorjack/quicksand
 
  */
-
-(function($) {
+(function (factory) {
+	if (typeof define === "function" && define.amd) {
+		define(['jquery', 'jquery.easing'], function ($) {
+			return factory($);
+		});
+	} else if (typeof module === "object" && typeof module.exports === "object") {
+        var jQuery = require('jquery');
+        require('jquery.easing')(jQuery);
+		exports = factory(jQuery);
+	} else {
+		factory(jQuery);
+	}
+})(function($){
   
   var cloneWithCanvases = function(jqueryObject) {
       var clonedJqueryObject =  jqueryObject.clone();
@@ -466,4 +477,4 @@ Github site: http://github.com/razorjack/quicksand
       }
     });
   };
-}(jQuery));
+});
